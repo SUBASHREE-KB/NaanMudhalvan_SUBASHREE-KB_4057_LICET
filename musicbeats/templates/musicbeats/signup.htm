@@ -1,0 +1,192 @@
+{% extends 'musicbeats/basic.htm' %}
+{% block title %}SignUp{% endblock %}
+
+{% block body %}
+
+<style>
+    body {
+        background-color: cornsilk;
+        margin: 0;
+        padding: 0;
+        background-image: url('/static/musicbeats/loginbg.jpg');
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 91.8vh; 
+    }
+    h1 {
+        text-align: center;
+        color: #92530b; 
+        margin-bottom: 5px;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+        font-size: 35px;
+    }
+    .signup-form {
+        width: 500px; 
+        padding: 30px;
+        background-color: rgba(255, 255, 255, 0.9); 
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); 
+    }
+    .form-group {
+        margin-top: 3px;
+        margin-bottom: 3px;
+        display: flex;
+        flex-direction: column;
+    }
+    .form-group label {
+        font-weight: bold;
+        color: #695937;
+        font-size: 16px;
+        margin-bottom: 3px;
+    }
+    .form-control {
+        width: 100%;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #f3f4f6;
+        color: #695937;
+    }
+  
+    .form-control::placeholder {
+        font-size: 0.9em;
+        color: #999;
+    }
+    .btn-primary {
+        width: 100%;
+        background-color: #695937;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        color: #fff;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+    .btn-primary:hover {
+        background-color: #695937;
+    }
+   
+    .logo {
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: center;
+    }
+    .logo img {
+        width: 450px;
+        max-width: 100%; 
+    }
+</style>
+
+<div class="container">
+    <div class="signup-form">
+        <div class="logo">
+            <img src="/static/musicbeats/register.jpg" alt="Logo">
+        </div>
+        <form action="/musicbeats/signup" method="POST" onsubmit="return validateForm()" novalidate>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input type="tel" class="form-control" id="phone" placeholder="1234567890" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="text" class="form-control" id="firstname" name="firstname" required>
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" class="form-control" id="lastname" name="lastname" required>
+            </div>
+            <div class="form-group">
+                <label for="pass1">Password</label>
+                <input type="password" class="form-control" id="pass1" name="pass1" required>
+            </div>
+            <div class="form-group">
+                <label for="pass2">Password (again)</label>
+                <input type="password" class="form-control" id="pass2" name="pass2" required>
+            </div>
+            <div style="padding-top: 2%;">
+                <button type="submit" class="btn btn-primary" id="signupButton">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        var email = document.getElementById('email').value;
+        var phone = document.getElementById('phone').value;
+        var username = document.getElementById('username').value;
+        var firstname = document.getElementById('firstname').value;
+        var lastname = document.getElementById('lastname').value;
+        var pass1 = document.getElementById('pass1').value;
+        var pass2 = document.getElementById('pass2').value;
+
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var phoneRegex = /^\d{10}$/;
+        var passRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            document.getElementById('email').focus();
+            return false;
+        }
+
+        if (!phoneRegex.test(phone)) {
+            alert('Please enter a valid phone number (10 digits without spaces or special characters).');
+            document.getElementById('phone').focus();
+            return false;
+        }
+
+        if (username.trim() === '') {
+            alert('Please enter your username.');
+            document.getElementById('username').focus();
+            return false;
+        }
+
+        if (firstname.trim() === '') {
+            alert('Please enter your first name.');
+            document.getElementById('firstname').focus();
+            return false;
+        }
+
+        if (lastname.trim() === '') {
+            alert('Please enter your last name.');
+            document.getElementById('lastname').focus();
+            return false;
+        }
+
+        if (!passRegex.test(pass1)) {
+            alert('Password must contain at least 8 characters with at least one letter, one number, and one special character.');
+            document.getElementById('pass1').focus();
+            return false;
+        }
+
+        if (pass1 !== pass2) {
+            alert('Passwords do not match. Please try again.');
+            document.getElementById('pass1').value = '';
+            document.getElementById('pass2').value = '';
+            document.getElementById('pass1').focus();
+            return false;
+        }
+
+        return true;
+    }
+
+    document.getElementById('signupButton').addEventListener('click', function() {
+        this.classList.add('clicked');
+    });
+</script>
+
+{% endblock %}

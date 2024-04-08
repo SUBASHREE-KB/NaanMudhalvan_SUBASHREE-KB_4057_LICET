@@ -1,0 +1,23 @@
+{% extends 'musicbeats/basic.htm' %}
+{% block title %}Signup Error{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        background-image: url('/static/musicbeats/error.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+<div class="container" style="display: flex; justify-content: center; align-items: center; height: 90vh;">
+    <div class="form-container" style="text-align: center;">
+        <h1 class="heading">Sign Up Error</h1>
+        <div class="alert alert-danger" role="alert">
+            User already exists! Try with other user name.
+        </div>
+        <div style="text-align: center;">
+            <a href="/musicbeats/signup" class="btn btn-primary">Go back to login</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

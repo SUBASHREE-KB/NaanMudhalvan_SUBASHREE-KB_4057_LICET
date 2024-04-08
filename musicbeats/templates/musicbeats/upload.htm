@@ -1,0 +1,69 @@
+{%extends 'musicbeats/basic.htm'%}
+{% block title%}Login{% endblock %}
+
+{% block body %}
+<style>
+  body {
+      background-image: url('/static/musicbeats/error.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+  .form-label {
+    font-weight: bold;
+    color:#333;
+  }
+  .container{
+    padding-top: 10px;;
+    border-radius: 10px;
+    background-color: white;
+    max-width: 500px;
+  }
+</style>
+<div class="container my-3">
+  <h2 style="text-align: center; padding-top: 2%; color:#333">Upload Your Song</h2>
+    <form action="/musicbeats/upload" enctype="multipart/form-data" method="POST">{% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail1" class="form-label">Song Title</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name" placeholder="Enter the song title" required>
+        </div>
+        
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label" >Singers</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="singer" placeholder="Singers Name (Seperate with Commas)" required>
+          </div>
+
+          
+          <div class="form-group" >
+            <label for="exampleInputEmail1" class="form-label">Tags </label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tag" placeholder="Tags (Seperate By Commas)" required>
+          </div>
+
+
+          <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label">Image Link (Associated With Your Song)</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="image" placeholder="Link to Image" required>
+          </div>    
+
+
+        <div class="form-group">
+          <label for="exampleInputPassword1" class="form-label">Movie Name</label>
+          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Movie name in which this song is there" name="movie" required>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Credit</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Add Credit Link" name="credit" required>
+          </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlFile1" class="form-label">Upload mp3 file</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file" required>
+          </div>
+        
+    <div style="padding-top: 3%; padding-bottom: 3%; text-align: center;">
+        <button type="submit" class="btn btn-primary" style="background-color:#333;">Upload</button>
+    </div>
+      </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'musicbeats/basic.htm'%}
+{% block title%}Login{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        background-color: cornsilk;
+        margin: 0; 
+        padding: 0; 
+        background-image: url('/static/musicbeats/loginbg.jpg');
+    }
+    .container {
+        background-color: transparent;
+    }
+    .form-label {
+        color: #695937;
+        font-weight: bold;
+    }
+    .form-container {
+        max-width: 600px;
+        padding: 60px;
+        border: 1px solid #ccc;;
+        border-radius: 12px;
+        background-color: #f9f9f9;
+        margin: 0 auto; 
+        margin-top: 35px; 
+    }
+    .heading {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #ac8b6c;
+        font-family: 'Arial', sans-serif;
+        font-weight: bold;
+    }
+    .logo {
+        width: 300px;
+        height: auto;
+        margin-bottom: 20px;
+        display: block; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .submit-button {
+        background-color: #695937;
+        width: 100%;
+        border: none;
+        transition: background-color 0.3s ease;
+        font-weight:bold;
+    }
+    .submit-button:hover {
+        background-color: rgb(207, 196, 171); 
+    }
+   
+    .submit-button.clicked {
+        background-color:  #695937;
+    }
+</style>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class="heading">
+            <img src="/static/musicbeats/login.jpg" alt="Logo" class="logo">
+        </h1>
+        <form action="/musicbeats/login" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" class="form-control"  id="exampleInputEmail1" aria-describedby="emailHelp"
+                    name="username" placeholder="Enter Username" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                    name="password" required>
+            </div>
+            <div style="text-align: center;">
+                <button type="submit" class="btn btn-primary submit-button" id="loginButton">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('loginButton').addEventListener('click', function() {
+        this.classList.add('clicked');
+    });
+</script>
+{% endblock %}
